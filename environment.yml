@@ -6,6 +6,7 @@ dependencies:
   - bzip2=1.0.8
   - ca-certificates=2026.2.25
   - icu=78.2
+  - joblib=1.5.3
   - libblas=3.11.0
   - libcblas=3.11.0
   - libcxx=22.1.0
@@ -30,8 +31,11 @@ dependencies:
   - python-dateutil=2.9.0.post0
   - python_abi=3.11
   - readline=8.3
+  - scikit-learn=1.8.0
+  - scipy=1.17.1
   - setuptools=82.0.0
   - six=1.17.0
+  - threadpoolctl=3.6.0
   - tk=8.6.13
   - tzdata=2025c
   - wheel=0.46.3
