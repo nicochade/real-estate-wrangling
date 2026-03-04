@@ -5,6 +5,23 @@ import pandas as pd
 
 MELB_URL = "https://cs.famaf.unc.edu.ar/~mteruel/datasets/diplodatos/melb_data.csv"
 
+AIRBNB_URL = "https://cs.famaf.unc.edu.ar/~mteruel/datasets/diplodatos/cleansed_listings_dec18.csv"
+
+AIRBNB_INTERESTING_COLS = [
+    "description", "neighborhood_overview",
+    "street", "neighborhood", "city", "suburb", "state", "zipcode",
+    "price", "weekly_price", "monthly_price",
+    "latitude", "longitude",
+]
+
+def load_airbnb(url: str = AIRBNB_URL) -> pd.DataFrame:
+    """Load Airbnb listings and keep only available columns (robust to schema changes)."""
+    df = pd.read_csv(url, low_memory=False)
+    cols_ok = [c for c in AIRBNB_INTERESTING_COLS if c in df.columns]
+    if cols_ok:
+        df = df[cols_ok].copy()
+    return df
+
 
 def project_root() -> Path:
     """Return the repository root path (assumes this file is in src/)."""
