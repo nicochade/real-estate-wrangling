@@ -1,0 +1,14 @@
+# data (local / heavy)
+data/raw/
+data/processed/
+
+# notebooks
+.ipynb_checkpoints/
+
+# python env + cache
+.venv/
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
