@@ -6,6 +6,14 @@ import argparse
 from src.db import build_sqlite, run_query
 
 
+def project_root() -> Path:
+    return Path(__file__).resolve().parents[1]
+
+
+def read_sql(path: Path) -> str:
+    return path.read_text(encoding="utf-8")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--db", default=None, help="Path to sqlite db (optional).")
@@ -14,33 +22,17 @@ def main() -> None:
     dbfile = Path(args.db) if args.db else None
     dbfile = build_sqlite(dbfile=dbfile)
 
-    queries = {
-        "tables_count": """
-            SELECT
-              (SELECT COUNT(*) FROM melbourne) AS melbourne_rows,
-              (SELECT COUNT(*) FROM airbnb_listings) AS airbnb_rows;
-        """,
-        "melbourne_price_by_type": """
-            SELECT Type, COUNT(*) AS n, AVG(Price) AS avg_price
-            FROM melbourne
-            WHERE Price IS NOT NULL
-            GROUP BY Type
-            ORDER BY avg_price DESC;
-        """,
-        "airbnb_price_by_zipcode_top10": """
-            SELECT zipcode, COUNT(*) AS n, AVG(CAST(REPLACE(REPLACE(price,'$',''),',','') AS REAL)) AS avg_price
-            FROM airbnb_listings
-            WHERE zipcode IS NOT NULL AND price IS NOT NULL
-            GROUP BY zipcode
-            HAVING n >= 5
-            ORDER BY avg_price DESC
-            LIMIT 10;
-        """,
-    }
+    qdir = project_root() / "queries"
+    query_files = [
+        qdir / "tables_count.sql",
+        qdir / "melbourne_price_by_type.sql",
+        qdir / "airbnb_price_by_zipcode_top10.sql",
+    ]
 
-    for name, sql in queries.items():
+    for qpath in query_files:
+        sql = read_sql(qpath)
         df = run_query(sql, dbfile=dbfile)
-        print(f"\n--- {name} ---")
+        print(f"\n--- {qpath.stem} ---")
         print(df.to_string(index=False))
 
 
