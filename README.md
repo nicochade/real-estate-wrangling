@@ -51,3 +51,7 @@ This will:
 - build `data/interim/real_estate.db`
 - load `melbourne` and `airbnb_listings` tables
 - execute the queries stored in `queries/`
+
+## Notes
+- The pipeline uses `IterativeImputer` (experimental in scikit-learn), enabled explicitly in `src/preprocessing.py`.
+- You may see a `ConvergenceWarning` from the imputer (“early stopping criterion not reached”). The pipeline still completes and saves the output.
