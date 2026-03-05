@@ -87,7 +87,8 @@ def impute_iterative_knn(
     imputer = IterativeImputer(
         estimator=KNeighborsRegressor(n_neighbors=n_neighbors),
         random_state=random_state,
-        max_iter=10,
+        max_iter=30,
+        tol=1e-3,
     )
     arr_imp = imputer.fit_transform(arr_scaled)
 

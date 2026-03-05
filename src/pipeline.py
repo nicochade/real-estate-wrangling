@@ -5,6 +5,10 @@ from src.cleaning import filter_outliers_by_quantiles
 from src.enrichment import aggregate_airbnb_by_zipcode, merge_airbnb_agg
 from src.preprocessing import one_hot_encode, impute_iterative_knn, add_pca_columns
 from src.validation import validate_processed_dataset
+import warnings
+from sklearn.exceptions import ConvergenceWarning
+
+warnings.filterwarnings("ignore", category=ConvergenceWarning)
 
 
 CAT_COLS = ["Suburb", "Type", "Method", "SellerG", "CouncilArea", "Regionname"]
