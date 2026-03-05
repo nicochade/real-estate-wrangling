@@ -22,3 +22,10 @@ It loads the Melbourne housing dataset, enriches it with Airbnb signals aggregat
 ```bash
 conda env create -f environment.yml
 conda activate real-estate-wrangling
+
+## Optional: SQL module
+This repo also includes a small SQLite module (built locally under `data/interim/`) to run a few example SQL queries.
+
+Run:
+```bash
+python -m src.run_queries
