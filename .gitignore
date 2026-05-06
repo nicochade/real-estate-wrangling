@@ -1,0 +1,16 @@
+# Local-only history of the original assignment notebooks (do not publish)
+archive/
+
+# Data folders are created on demand by src/io.py + src/db.py, never tracked
+data/
+
+# Databases & notebook artifacts
+*.db
+.ipynb_checkpoints/
+notebooks/*.csv
+
+# Python / OS / tooling
+__pycache__/
+*.pyc
+.DS_Store
+.claude/

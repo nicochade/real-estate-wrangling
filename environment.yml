@@ -1,0 +1,16 @@
+name: real-estate-ml
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pandas
+  - numpy
+  - matplotlib
+  - seaborn
+  - scikit-learn
+  - sqlalchemy
+  - jupyterlab
+  - notebook
+  - ipykernel
+  - nbconvert
+  - pip
